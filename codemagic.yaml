@@ -5,7 +5,15 @@ workflows:
     environment:
       java: 17
     scripts:
-      - name: Build APK directly
-        script: gradle assembleDebug
+      - name: Install and Switch to Gradle 9.3.1
+        script: |
+          wget https://services.gradle.org/distributions/gradle-9.3.1-bin.zip -P /tmp
+          sudo unzip -d /opt/gradle /tmp/gradle-9.3.1-bin.zip
+          export PATH=/opt/gradle/gradle-9.3.1/bin:$PATH
+          echo "export PATH=/opt/gradle/gradle-9.3.1/bin:\$PATH" >> ~/.bash_profile
+      - name: Build APK with New Gradle
+        script: |
+          export PATH=/opt/gradle/gradle-9.3.1/bin:$PATH
+          gradle assembleDebug
     artifacts:
       - app/build/outputs/apk/**/*.apk
