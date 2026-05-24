@@ -1,0 +1,6 @@
+{
+  "name": "أشرف النقاش",
+  "description": "تطبيق البث الرياضي الترفيهي ومساعد الذكاء الاصطناعي الذكي بإدارة وتطوير أشرف النقاش للرد على كافة الاستفسارات الرياضية باللغة العربية.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
