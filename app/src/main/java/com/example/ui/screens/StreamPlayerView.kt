@@ -114,10 +114,18 @@ fun StreamPlayerView(
     // Check if the stream url is empty or simulated
     val isSimulated = url.trim().isEmpty()
 
-    // Setup ExoPlayer Instance
+    // Setup ExoPlayer Instance with explicit attribution context to prevent AppOps logs
+    val playContext = remember(context) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            context.createAttributionContext("default")
+        } else {
+            context
+        }
+    }
+
     val exoPlayer = remember(url) {
         if (!isSimulated) {
-            ExoPlayer.Builder(context).build().apply {
+            ExoPlayer.Builder(playContext).build().apply {
                 val mediaItem = MediaItem.fromUri(url)
                 setMediaItem(mediaItem)
                 prepare()
